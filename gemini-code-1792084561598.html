@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holiday Gift Card Rewards - Claim Your Free $100 Gift Card</title>
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes snowfall {
+            0% { transform: translateY(-10vh); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0.2; }
+        }
+        .snowflake {
+            position: fixed;
+            top: -10vh;
+            color: #ffffff;
+            user-select: none;
+            z-index: 1000;
+            pointer-events: none;
+            animation: snowfall linear infinite;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-red-900 via-red-800 to-green-950 text-white min-h-screen font-sans flex flex-col justify-between">
+
+    <!-- Falling Snowflakes Effect -->
+    <div id="snow-container"></div>
+
+    <!-- Header / Navbar -->
+    <header class="bg-red-950/80 backdrop-blur border-b border-red-800 p-4 shadow-lg">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <span class="text-3xl">🎄</span>
+                <span class="font-bold text-xl tracking-wider text-amber-400">USA Holiday Rewards</span>
+            </div>
+            <div class="text-sm bg-amber-500 text-black px-3 py-1 rounded-full font-semibold">
+                US Residents Only 🇺🇸
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 py-10 text-center flex-grow">
+        <div class="bg-red-950/60 border border-red-700/50 rounded-2xl p-8 shadow-2xl backdrop-blur-md">
+            <span class="bg-red-700 text-white text-xs uppercase tracking-widest px-3 py-1 rounded-full font-bold">Limited Time Christmas Offer</span>
+            
+            <h1 class="text-4xl md:text-5xl font-extrabold mt-4 mb-3 text-amber-300 drop-shadow">
+                Claim Your Free $100 Holiday Gift Card!
+            </h1>
+            <p class="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
+                Celebrate this Christmas with top US brands like Amazon, Walmart, Apple, and Target. Select your preferred gift card and verify your US shipping address to claim.
+            </p>
+
+            <!-- Gift Card Selection Step -->
+            <div id="step-1" class="transition-all duration-300">
+                <h2 class="text-xl font-semibold mb-6 text-white border-b border-red-800 pb-2">Select Your Gift Card:</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                    <!-- Amazon -->
+                    <div onclick="selectCard('Amazon $100')" class="card-option bg-white text-black p-4 rounded-xl cursor-pointer hover:scale-105 transition border-4 border-transparent hover:border-amber-400 shadow-md flex flex-col items-center justify-center">
+                        <span class="text-3xl font-black text-orange-600 mb-1">amazon</span>
+                        <span class="text-sm font-bold text-gray-700">$100 Value</span>
+                    </div>
+                    <!-- Walmart -->
+                    <div onclick="selectCard('Walmart $100')" class="card-option bg-white text-black p-4 rounded-xl cursor-pointer hover:scale-105 transition border-4 border-transparent hover:border-amber-400 shadow-md flex flex-col items-center justify-center">
+                        <span class="text-3xl font-black text-blue-600 mb-1">Walmart</span>
+                        <span class="text-sm font-bold text-gray-700">$100 Value</span>
+                    </div>
+                    <!-- Apple -->
+                    <div onclick="selectCard('Apple $100')" class="card-option bg-white text-black p-4 rounded-xl cursor-pointer hover:scale-105 transition border-4 border-transparent hover:border-amber-400 shadow-md flex flex-col items-center justify-center">
+                        <span class="text-3xl font-black text-gray-900 mb-1"> Apple</span>
+                        <span class="text-sm font-bold text-gray-700">$100 Value</span>
+                    </div>
+                    <!-- Target -->
+                    <div onclick="selectCard('Target $100')" class="card-option bg-white text-black p-4 rounded-xl cursor-pointer hover:scale-105 transition border-4 border-transparent hover:border-amber-400 shadow-md flex flex-col items-center justify-center">
+                        <span class="text-3xl font-black text-red-600 mb-1">O Target</span>
+                        <span class="text-sm font-bold text-gray-700">$100 Value</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Claim Form Step (Hidden Initially) -->
+            <div id="step-2" class="hidden transition-all duration-300 max-w-md mx-auto text-left">
+                <div class="bg-red-900/40 p-4 rounded-lg mb-6 border border-red-700 text-sm">
+                    Selected Card: <span id="selected-card-name" class="font-bold text-amber-300"></span>
+                </div>
+                
+                <form id="redeem-form" onsubmit="handleClaim(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase mb-1 text-gray-300">Full Name (US Resident)</label>
+                        <input type="text" required placeholder="John Doe" class="w-full bg-red-900/50 border border-red-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-amber-400">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase mb-1 text-gray-300">Email Address</label>
+                        <input type="email" required placeholder="john@example.com" class="w-full bg-red-900/50 border border-red-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-amber-400">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase mb-1 text-gray-300">USA State</label>
+                        <select required class="w-full bg-red-950 border border-red-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-amber-400">
+                            <option value="">Select State</option>
+                            <option value="California">California</option>
+                            <option value="New York">New York</option>
+                            <option value="Texas">Texas</option>
+                            <option value="Florida">Florida</option>
+                            <option value="Illinois">Illinois</option>
+                            <option value="Other">Other US State</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="w-full bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-black font-bold py-3 px-6 rounded-lg transition shadow-lg mt-4">
+                        Claim Gift Card Now 🎁
+                    </button>
+                </form>
+            </div>
+
+            <!-- Success / Processing Step (Hidden Initially) -->
+            <div id="step-3" class="hidden py-8">
+                <div class="text-6xl mb-4">🎉</div>
+                <h3 class="text-2xl font-bold text-amber-300 mb-2">Almost Done!</h3>
+                <p class="text-gray-200 mb-6 max-w-md mx-auto">
+                    Your request for <span id="final-card-name" class="font-bold text-white"></span> is registered. To prevent automated spam, please complete a quick verification check.
+                </p>
+                <!-- यहाँ আপনি আপনার CPA Offer বা Locker Link যুক্ত করতে পারেন -->
+                <a href="YOUR_CPA_OFFER_OR_LOCKER_LINK_HERE" target="_blank" class="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3.5 px-8 rounded-xl transition shadow-xl text-lg">
+                    Complete Verification 🚀
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-red-950/80 border-t border-red-800 text-center py-4 text-xs text-gray-400">
+        <p>&copy; 2026 USA Holiday Rewards. Not affiliated with Amazon, Walmart, Apple, or Target. Valid for US participants only.</p>
+    </footer>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        let chosenCard = "";
+
+        function selectCard(cardName) {
+            chosenCard = cardName;
+            document.getElementById('selected-card-name').innerText = cardName;
+            document.getElementById('final-card-name').innerText = cardName;
+            
+            // Switch from Step 1 to Step 2
+            document.getElementById('step-1').classList.add('hidden');
+            document.getElementById('step-2').classList.remove('hidden');
+        }
+
+        function handleClaim(event) {
+            event.preventDefault();
+            // Switch from Step 2 to Step 3
+            document.getElementById('step-2').classList.add('hidden');
+            document.getElementById('step-3').classList.remove('hidden');
+        }
+
+        // Falling Snow Animation
+        const snowContainer = document.getElementById('snow-container');
+        const numberOfSnowflakes = 40;
+
+        for (let i = 0; i < numberOfSnowflakes; i++) {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.innerHTML = '❄';
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            snowflake.style.animationDelay = Math.random() * 5 + 's';
+            snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
+            snowContainer.appendChild(snowflake);
+        }
+    </script>
+</body>
+</html>
